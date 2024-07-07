@@ -2,80 +2,79 @@
 using DotNet8Mvc.NLayerArchitecture.Models.Features.Blog;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DotNet8Mvc.NLayerArchitecture.Presentation.Controllers
+namespace DotNet8Mvc.NLayerArchitecture.Presentation.Controllers;
+
+public class BlogController : Controller
 {
-    public class BlogController : Controller
+    private readonly BL_Blog _bL_Blog;
+
+    public BlogController(BL_Blog bL_Blog)
     {
-        private readonly BL_Blog _bL_Blog;
+        _bL_Blog = bL_Blog;
+    }
 
-        public BlogController(BL_Blog bL_Blog)
+    public async Task<IActionResult> Index()
+    {
+        var result = await _bL_Blog.GetBlogs();
+        if (result.IsError)
         {
-            _bL_Blog = bL_Blog;
+            TempData["error"] = result.Message;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            var result = await _bL_Blog.GetBlogs();
-            if (result.IsError)
-            {
-                TempData["error"] = result.Message;
-            }
+        return View(result);
+    }
 
-            return View(result);
+    [ActionName("CreateBlog")]
+    public IActionResult CreateBlogPage()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Save(BlogRequestModel requestModel)
+    {
+        var result = await _bL_Blog.CreateBlog(requestModel);
+        if (result.IsSuccess)
+        {
+            TempData["success"] = result.Message;
+        }
+        else
+        {
+            TempData["error"] = result.Message;
         }
 
-        [ActionName("CreateBlog")]
-        public IActionResult CreateBlogPage()
+        return RedirectToAction("Index");
+    }
+
+    [ActionName("EditBlog")]
+    public async Task<IActionResult> Edit(int id)
+    {
+        var result = await _bL_Blog.GetBlogById(id);
+        return View(result);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Update(BlogRequestModel requestModel, int id)
+    {
+        var result = await _bL_Blog.PatchBlog(requestModel, id);
+        if (result.IsError)
         {
-            return View();
+            TempData["error"] = result.Message;
+        }
+        else
+        {
+            TempData["success"] = result.Message;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Save(BlogRequestModel requestModel)
-        {
-            var result = await _bL_Blog.CreateBlog(requestModel);
-            if (result.IsSuccess)
-            {
-                TempData["success"] = result.Message;
-            }
-            else
-            {
-                TempData["error"] = result.Message;
-            }
+        return RedirectToAction("Index");
+    }
 
-            return RedirectToAction("Index");
-        }
+    [HttpPost]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var result = await _bL_Blog.DeleteBlog(id);
+        string message = result.Message;
 
-        [ActionName("EditBlog")]
-        public async Task<IActionResult> Edit(int id)
-        {
-            var result = await _bL_Blog.GetBlogById(id);
-            return View(result);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Update(BlogRequestModel requestModel, int id)
-        {
-            var result = await _bL_Blog.PatchBlog(requestModel, id);
-            if (result.IsError)
-            {
-                TempData["error"] = result.Message;
-            }
-            else
-            {
-                TempData["success"] = result.Message;
-            }
-
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var result = await _bL_Blog.DeleteBlog(id);
-            string message = result.Message;
-
-            return Json(new { Message = message });
-        }
+        return Json(new { Message = message });
     }
 }
