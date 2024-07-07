@@ -107,15 +107,15 @@ namespace DotNet8Mvc.NLayerArchitecture.DataAccess.Features.Blog
 
                 if (!requestModel.BlogAuthor.IsNullOrEmpty())
                 {
-                    item.BlogTitle = requestModel.BlogAuthor;
+                    item.BlogAuthor = requestModel.BlogAuthor;
                 }
 
                 if (!requestModel.BlogContent.IsNullOrEmpty())
                 {
-                    item.BlogTitle = requestModel.BlogContent;
+                    item.BlogContent = requestModel.BlogContent;
                 }
 
-                _context.Update(item);
+                _context.Entry(item).State = EntityState.Modified;
                 int result = await _context.SaveChangesAsync();
 
                 responseModel = Result<BlogResponseModel>.ExecuteResult(result);

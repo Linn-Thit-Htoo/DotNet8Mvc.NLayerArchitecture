@@ -50,10 +50,39 @@ else
                     <td>@item.BlogContent</td>
                     <td>
                         <a class="btn btn-outline-success" href="/Blog/EditBlog/@item.BlogId">Edit</a>
-                        <button class="btn btn-outline-danger">Delete</button>
+                        <button type="button" class="btn btn-outline-danger btn-delete" data-id="@item.BlogId">Delete</button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+}
+
+@section scripts {
+    <script>
+        $('.btn-delete').click(function (e) {
+            let result = confirm("Are you sure want to delete?");
+            if (!result) return;
+
+            let id = $(this).data('id');
+
+            $.ajax({
+                type: "POST",
+                url: `/Blog/Delete/${id}`,
+                data: {  },
+                dataType: "json",
+                success: function (data) {
+                    console.log({ data });
+                    alert(data.message);
+                    location.href = "/Blog/Index";
+                },
+                error: function (ex) {
+                    var r = jQuery.parseJSON(response.responseText);
+                    console.log("Message: " + r.Message);
+                    console.log("StackTrace: " + r.StackTrace);
+                    console.log("ExceptionType: " + r.ExceptionType);
+                }
+            });
+        })
+    </script>
 }

@@ -63,26 +63,19 @@ namespace DotNet8Mvc.NLayerArchitecture.Presentation.Controllers
             }
             else
             {
-                TempData["error"] = result.Message;
+                TempData["success"] = result.Message;
             }
 
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _bL_Blog.DeleteBlog(id);
+            string message = result.Message;
 
-            if (result.IsError)
-            {
-                TempData["error"] = result.Message;
-            }
-            else
-            {
-                TempData["error"] = result.Message;
-            }
-
-            return RedirectToAction("Index");
+            return Json(new { Message = message });
         }
     }
 }
