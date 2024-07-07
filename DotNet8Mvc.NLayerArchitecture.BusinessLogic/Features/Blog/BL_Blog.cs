@@ -24,6 +24,28 @@ namespace DotNet8Mvc.NLayerArchitecture.BusinessLogic.Features.Blog
             return await _dA_Blog.GetBlogs();
         }
 
+        public async Task<Result<BlogModel>> GetBlogById(int id)
+        {
+            Result<BlogModel> responseModel;
+            try
+            {
+                if (id <= 0)
+                {
+                    responseModel = Result<BlogModel>.FailureResult(MessageResource.InvalidId);
+                    goto result;
+                }
+
+                responseModel = await _dA_Blog.GetBlogById(id);
+            }
+            catch (Exception ex)
+            {
+                responseModel = Result<BlogModel>.FailureResult(ex);
+            }
+
+        result:
+            return responseModel;
+        }
+
         public async Task<Result<BlogResponseModel>> CreateBlog(BlogRequestModel requestModel)
         {
             Result<BlogResponseModel> responseModel;
@@ -49,7 +71,7 @@ namespace DotNet8Mvc.NLayerArchitecture.BusinessLogic.Features.Blog
             Result<BlogResponseModel> responseModel;
             try
             {
-                if(id <= 0)
+                if (id <= 0)
                 {
                     responseModel = Result<BlogResponseModel>.FailureResult(MessageResource.InvalidId);
                     goto result;

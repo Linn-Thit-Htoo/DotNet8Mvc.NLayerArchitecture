@@ -46,6 +46,30 @@ namespace DotNet8Mvc.NLayerArchitecture.DataAccess.Features.Blog
             return responseModel;
         }
 
+        public async Task<Result<BlogModel>> GetBlogById(int id)
+        {
+            Result<BlogModel> responseModel;
+            try
+            {
+                var item = await _context.TblBlogs.FindAsync(id);
+                if (item is null)
+                {
+                    responseModel = Result<BlogModel>.FailureResult(MessageResource.NotFound, EnumStatusCode.NotFound);
+                    goto result;
+                }
+
+                var model = item.Map();
+                responseModel = Result<BlogModel>.SuccessResult(model);
+            }
+            catch (Exception ex)
+            {
+                responseModel = Result<BlogModel>.FailureResult(ex);
+            }
+
+        result:
+            return responseModel;
+        }
+
         public async Task<Result<BlogResponseModel>> CreateBlog(BlogRequestModel requestModel)
         {
             Result<BlogResponseModel> responseModel;
