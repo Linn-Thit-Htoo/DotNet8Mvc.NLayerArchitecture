@@ -51,5 +51,37 @@ namespace DotNet8Mvc.NLayerArchitecture.Presentation.Controllers
             var result = await _bL_Blog.GetBlogById(id);
             return View(result);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(BlogRequestModel requestModel, int id)
+        {
+            var result = await _bL_Blog.PatchBlog(requestModel, id);
+            if (result.IsError)
+            {
+                TempData["error"] = result.Message;
+            }
+            else
+            {
+                TempData["error"] = result.Message;
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _bL_Blog.DeleteBlog(id);
+
+            if (result.IsError)
+            {
+                TempData["error"] = result.Message;
+            }
+            else
+            {
+                TempData["error"] = result.Message;
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }
