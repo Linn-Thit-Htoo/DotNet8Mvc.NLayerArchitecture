@@ -22,5 +22,25 @@ namespace DotNet8Mvc.NLayerArchitecture.BusinessLogic.Features.Blog
         {
             return await _dA_Blog.GetBlogs();
         }
+
+        public async Task<Result<BlogResponseModel>> CreateBlog(BlogRequestModel requestModel)
+        {
+            Result<BlogResponseModel> responseModel;
+            try
+            {
+                responseModel = requestModel.IsValid();
+                if (responseModel.IsError)
+                    goto result;
+
+                responseModel = await _dA_Blog.CreateBlog(requestModel);
+            }
+            catch (Exception ex)
+            {
+                responseModel = Result<BlogResponseModel>.FailureResult(ex);
+            }
+
+        result:
+            return responseModel;
+        }
     }
 }

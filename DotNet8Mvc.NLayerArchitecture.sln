@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35005.142
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNet8Mvc.NLayerArchitecture.Presentation", "DotNet8Mvc.NLayerArchitecture.Presentation\DotNet8Mvc.NLayerArchitecture.Presentation.csproj", "{4DB51314-6874-489C-A1D9-337227F1B08B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet8Mvc.NLayerArchitecture.Presentation", "DotNet8Mvc.NLayerArchitecture.Presentation\DotNet8Mvc.NLayerArchitecture.Presentation.csproj", "{4DB51314-6874-489C-A1D9-337227F1B08B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNet8Mvc.NLayerArchitecture.BusinessLogic", "DotNet8Mvc.NLayerArchitecture.BusinessLogic\DotNet8Mvc.NLayerArchitecture.BusinessLogic.csproj", "{972D1F19-C04B-436C-9F01-9C44C73AA795}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet8Mvc.NLayerArchitecture.BusinessLogic", "DotNet8Mvc.NLayerArchitecture.BusinessLogic\DotNet8Mvc.NLayerArchitecture.BusinessLogic.csproj", "{972D1F19-C04B-436C-9F01-9C44C73AA795}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNet8Mvc.NLayerArchitecture.DataAccess", "DotNet8Mvc.NLayerArchitecture.DataAccess\DotNet8Mvc.NLayerArchitecture.DataAccess.csproj", "{C3DEEE8A-E585-416D-8DCF-CAF7D843E108}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet8Mvc.NLayerArchitecture.DataAccess", "DotNet8Mvc.NLayerArchitecture.DataAccess\DotNet8Mvc.NLayerArchitecture.DataAccess.csproj", "{C3DEEE8A-E585-416D-8DCF-CAF7D843E108}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNet8Mvc.NLayerArchitecture.Models", "DotNet8Mvc.NLayerArchitecture.Models\DotNet8Mvc.NLayerArchitecture.Models.csproj", "{EC97C8C4-2E44-43BD-BF36-F06C1CE8096D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet8Mvc.NLayerArchitecture.Models", "DotNet8Mvc.NLayerArchitecture.Models\DotNet8Mvc.NLayerArchitecture.Models.csproj", "{EC97C8C4-2E44-43BD-BF36-F06C1CE8096D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNet8Mvc.NLayerArchitecture.DbService", "DotNet8Mvc.NLayerArchitecture.DbService\DotNet8Mvc.NLayerArchitecture.DbService.csproj", "{C4CD2435-DC63-48C0-94ED-ACF4BF9C0CED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet8Mvc.NLayerArchitecture.DbService", "DotNet8Mvc.NLayerArchitecture.DbService\DotNet8Mvc.NLayerArchitecture.DbService.csproj", "{C4CD2435-DC63-48C0-94ED-ACF4BF9C0CED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNet8Mvc.NLayerArchitecture.Mapper", "DotNet8Mvc.NLayerArchitecture.Mapper\DotNet8Mvc.NLayerArchitecture.Mapper.csproj", "{59A1FCC8-39BE-48A2-B9B0-9165B65CB9AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet8Mvc.NLayerArchitecture.Mapper", "DotNet8Mvc.NLayerArchitecture.Mapper\DotNet8Mvc.NLayerArchitecture.Mapper.csproj", "{59A1FCC8-39BE-48A2-B9B0-9165B65CB9AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNet8Mvc.NLayerArchitecture.Shared", "DotNet8Mvc.NLayerArchitecture.Shared\DotNet8Mvc.NLayerArchitecture.Shared.csproj", "{A3D79112-A3E3-4AA3-BF03-EDDC0BE16CB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{59A1FCC8-39BE-48A2-B9B0-9165B65CB9AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59A1FCC8-39BE-48A2-B9B0-9165B65CB9AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59A1FCC8-39BE-48A2-B9B0-9165B65CB9AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3D79112-A3E3-4AA3-BF03-EDDC0BE16CB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3D79112-A3E3-4AA3-BF03-EDDC0BE16CB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3D79112-A3E3-4AA3-BF03-EDDC0BE16CB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3D79112-A3E3-4AA3-BF03-EDDC0BE16CB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

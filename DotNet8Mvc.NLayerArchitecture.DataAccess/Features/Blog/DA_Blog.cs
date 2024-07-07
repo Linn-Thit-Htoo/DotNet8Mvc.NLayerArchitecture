@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,6 +38,24 @@ namespace DotNet8Mvc.NLayerArchitecture.DataAccess.Features.Blog
             catch (Exception ex)
             {
                 responseModel = Result<BlogListResponseModel>.FailureResult(ex);
+            }
+
+            return responseModel;
+        }
+
+        public async Task<Result<BlogResponseModel>> CreateBlog(BlogRequestModel requestModel)
+        {
+            Result<BlogResponseModel> responseModel;
+            try
+            {
+                await _context.TblBlogs.AddAsync(requestModel.Map());
+                int result = await _context.SaveChangesAsync();
+
+                responseModel = Result<BlogResponseModel>.ExecuteResult(result);
+            }
+            catch (Exception ex)
+            {
+                responseModel = Result<BlogResponseModel>.FailureResult(ex);
             }
 
             return responseModel;

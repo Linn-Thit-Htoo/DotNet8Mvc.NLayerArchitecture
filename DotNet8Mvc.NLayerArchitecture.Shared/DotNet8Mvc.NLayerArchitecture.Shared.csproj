@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DotNet8Mvc.NLayerArchitecture.Shared\DotNet8Mvc.NLayerArchitecture.Shared.csproj" />
-  </ItemGroup>
-
 </Project>

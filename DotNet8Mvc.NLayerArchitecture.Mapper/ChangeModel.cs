@@ -20,5 +20,15 @@ namespace DotNet8Mvc.NLayerArchitecture.Mapper
                 BlogContent = dataModel.BlogContent
             };
         }
+
+        public static TblBlog Map(this BlogRequestModel requestModel)
+        {
+            return new TblBlog
+            {
+                BlogTitle = requestModel.BlogTitle,
+                BlogAuthor = requestModel.BlogAuthor,
+                BlogContent = requestModel.BlogContent
+            };
+        }
     }
 }
