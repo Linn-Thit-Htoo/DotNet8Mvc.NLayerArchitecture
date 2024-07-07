@@ -6,153 +6,146 @@ using DotNet8Mvc.NLayerArchitecture.Models.Features.Blog;
 using DotNet8Mvc.NLayerArchitecture.Models.Resources;
 using DotNet8Mvc.NLayerArchitecture.Shared;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DotNet8Mvc.NLayerArchitecture.DataAccess.Features.Blog
+namespace DotNet8Mvc.NLayerArchitecture.DataAccess.Features.Blog;
+
+public class DA_Blog
 {
-    public class DA_Blog
+    private readonly AppDbContext _context;
+
+    public DA_Blog(AppDbContext context)
     {
-        private readonly AppDbContext _context;
+        _context = context;
+    }
 
-        public DA_Blog(AppDbContext context)
+    public async Task<Result<BlogListResponseModel>> GetBlogs()
+    {
+        Result<BlogListResponseModel> responseModel;
+        try
         {
-            _context = context;
+            var lst = await _context.TblBlogs
+                .OrderByDescending(x => x.BlogId)
+                .ToListAsync();
+
+            var dataLst = lst.Select(x => x.Map()).ToList();
+            var model = new BlogListResponseModel(dataLst);
+
+            responseModel = Result<BlogListResponseModel>.SuccessResult(model);
+        }
+        catch (Exception ex)
+        {
+            responseModel = Result<BlogListResponseModel>.FailureResult(ex);
         }
 
-        public async Task<Result<BlogListResponseModel>> GetBlogs()
+        return responseModel;
+    }
+
+    public async Task<Result<BlogModel>> GetBlogById(int id)
+    {
+        Result<BlogModel> responseModel;
+        try
         {
-            Result<BlogListResponseModel> responseModel;
-            try
+            var item = await _context.TblBlogs.FindAsync(id);
+            if (item is null)
             {
-                var lst = await _context.TblBlogs
-                    .OrderByDescending(x => x.BlogId)
-                    .ToListAsync();
-
-                var dataLst = lst.Select(x => x.Map()).ToList();
-                var model = new BlogListResponseModel(dataLst);
-
-                responseModel = Result<BlogListResponseModel>.SuccessResult(model);
-            }
-            catch (Exception ex)
-            {
-                responseModel = Result<BlogListResponseModel>.FailureResult(ex);
+                responseModel = Result<BlogModel>.FailureResult(MessageResource.NotFound, EnumStatusCode.NotFound);
+                goto result;
             }
 
-            return responseModel;
+            var model = item.Map();
+            responseModel = Result<BlogModel>.SuccessResult(model);
         }
-
-        public async Task<Result<BlogModel>> GetBlogById(int id)
+        catch (Exception ex)
         {
-            Result<BlogModel> responseModel;
-            try
-            {
-                var item = await _context.TblBlogs.FindAsync(id);
-                if (item is null)
-                {
-                    responseModel = Result<BlogModel>.FailureResult(MessageResource.NotFound, EnumStatusCode.NotFound);
-                    goto result;
-                }
-
-                var model = item.Map();
-                responseModel = Result<BlogModel>.SuccessResult(model);
-            }
-            catch (Exception ex)
-            {
-                responseModel = Result<BlogModel>.FailureResult(ex);
-            }
+            responseModel = Result<BlogModel>.FailureResult(ex);
+        }
 
         result:
-            return responseModel;
+        return responseModel;
+    }
+
+    public async Task<Result<BlogResponseModel>> CreateBlog(BlogRequestModel requestModel)
+    {
+        Result<BlogResponseModel> responseModel;
+        try
+        {
+            await _context.TblBlogs.AddAsync(requestModel.Map());
+            int result = await _context.SaveChangesAsync();
+
+            responseModel = Result<BlogResponseModel>.ExecuteResult(result);
+        }
+        catch (Exception ex)
+        {
+            responseModel = Result<BlogResponseModel>.FailureResult(ex);
         }
 
-        public async Task<Result<BlogResponseModel>> CreateBlog(BlogRequestModel requestModel)
+        return responseModel;
+    }
+
+    public async Task<Result<BlogResponseModel>> PatchBlog(BlogRequestModel requestModel, int id)
+    {
+        Result<BlogResponseModel> responseModel;
+        try
         {
-            Result<BlogResponseModel> responseModel;
-            try
+            var item = await _context.TblBlogs.FindAsync(id);
+            if (item is null)
             {
-                await _context.TblBlogs.AddAsync(requestModel.Map());
-                int result = await _context.SaveChangesAsync();
-
-                responseModel = Result<BlogResponseModel>.ExecuteResult(result);
-            }
-            catch (Exception ex)
-            {
-                responseModel = Result<BlogResponseModel>.FailureResult(ex);
+                responseModel = Result<BlogResponseModel>.FailureResult(MessageResource.NotFound, EnumStatusCode.NotFound);
+                goto result;
             }
 
-            return responseModel;
+            if (!requestModel.BlogTitle.IsNullOrEmpty())
+            {
+                item.BlogTitle = requestModel.BlogTitle;
+            }
+
+            if (!requestModel.BlogAuthor.IsNullOrEmpty())
+            {
+                item.BlogAuthor = requestModel.BlogAuthor;
+            }
+
+            if (!requestModel.BlogContent.IsNullOrEmpty())
+            {
+                item.BlogContent = requestModel.BlogContent;
+            }
+
+            _context.Entry(item).State = EntityState.Modified;
+            int result = await _context.SaveChangesAsync();
+
+            responseModel = Result<BlogResponseModel>.ExecuteResult(result);
         }
-
-        public async Task<Result<BlogResponseModel>> PatchBlog(BlogRequestModel requestModel, int id)
+        catch (Exception ex)
         {
-            Result<BlogResponseModel> responseModel;
-            try
-            {
-                var item = await _context.TblBlogs.FindAsync(id);
-                if (item is null)
-                {
-                    responseModel = Result<BlogResponseModel>.FailureResult(MessageResource.NotFound, EnumStatusCode.NotFound);
-                    goto result;
-                }
-
-                if (!requestModel.BlogTitle.IsNullOrEmpty())
-                {
-                    item.BlogTitle = requestModel.BlogTitle;
-                }
-
-                if (!requestModel.BlogAuthor.IsNullOrEmpty())
-                {
-                    item.BlogAuthor = requestModel.BlogAuthor;
-                }
-
-                if (!requestModel.BlogContent.IsNullOrEmpty())
-                {
-                    item.BlogContent = requestModel.BlogContent;
-                }
-
-                _context.Entry(item).State = EntityState.Modified;
-                int result = await _context.SaveChangesAsync();
-
-                responseModel = Result<BlogResponseModel>.ExecuteResult(result);
-            }
-            catch (Exception ex)
-            {
-                responseModel = Result<BlogResponseModel>.FailureResult(ex);
-            }
+            responseModel = Result<BlogResponseModel>.FailureResult(ex);
+        }
 
         result:
-            return responseModel;
-        }
+        return responseModel;
+    }
 
-        public async Task<Result<BlogResponseModel>> DeleteBlog(int id)
+    public async Task<Result<BlogResponseModel>> DeleteBlog(int id)
+    {
+        Result<BlogResponseModel> responseModel;
+        try
         {
-            Result<BlogResponseModel> responseModel;
-            try
+            var item = await _context.TblBlogs.FindAsync(id);
+            if (item is null)
             {
-                var item = await _context.TblBlogs.FindAsync(id);
-                if (item is null)
-                {
-                    responseModel = Result<BlogResponseModel>.FailureResult(MessageResource.NotFound, EnumStatusCode.NotFound);
-                    goto result;
-                }
-
-                _context.TblBlogs.Remove(item);
-                int result = await _context.SaveChangesAsync();
-
-                responseModel = Result<BlogResponseModel>.ExecuteResult(result);
+                responseModel = Result<BlogResponseModel>.FailureResult(MessageResource.NotFound, EnumStatusCode.NotFound);
+                goto result;
             }
-            catch (Exception ex)
-            {
-                responseModel = Result<BlogResponseModel>.FailureResult(ex);
-            }
+
+            _context.TblBlogs.Remove(item);
+            int result = await _context.SaveChangesAsync();
+
+            responseModel = Result<BlogResponseModel>.ExecuteResult(result);
+        }
+        catch (Exception ex)
+        {
+            responseModel = Result<BlogResponseModel>.FailureResult(ex);
+        }
 
         result:
-            return responseModel;
-        }
+        return responseModel;
     }
 }
