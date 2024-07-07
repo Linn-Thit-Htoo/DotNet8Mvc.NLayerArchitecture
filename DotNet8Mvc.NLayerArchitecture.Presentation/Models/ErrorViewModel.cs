@@ -1,9 +1,8 @@
-namespace DotNet8Mvc.NLayerArchitecture.Presentation.Models
-{
-    public class ErrorViewModel
-    {
-        public string? RequestId { get; set; }
+namespace DotNet8Mvc.NLayerArchitecture.Presentation.Models;
 
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
-    }
+public class ErrorViewModel
+{
+    public string? RequestId { get; set; }
+
+    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 }
