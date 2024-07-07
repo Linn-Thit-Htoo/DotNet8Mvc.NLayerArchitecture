@@ -23,9 +23,7 @@ public class DA_Blog
         Result<BlogListResponseModel> responseModel;
         try
         {
-            var lst = await _context.TblBlogs
-                .OrderByDescending(x => x.BlogId)
-                .ToListAsync();
+            var lst = await _context.TblBlogs.OrderByDescending(x => x.BlogId).ToListAsync();
 
             var dataLst = lst.Select(x => x.Map()).ToList();
             var model = new BlogListResponseModel(dataLst);
@@ -48,7 +46,10 @@ public class DA_Blog
             var item = await _context.TblBlogs.FindAsync(id);
             if (item is null)
             {
-                responseModel = Result<BlogModel>.FailureResult(MessageResource.NotFound, EnumStatusCode.NotFound);
+                responseModel = Result<BlogModel>.FailureResult(
+                    MessageResource.NotFound,
+                    EnumStatusCode.NotFound
+                );
                 goto result;
             }
 
@@ -60,7 +61,7 @@ public class DA_Blog
             responseModel = Result<BlogModel>.FailureResult(ex);
         }
 
-        result:
+    result:
         return responseModel;
     }
 
@@ -90,7 +91,10 @@ public class DA_Blog
             var item = await _context.TblBlogs.FindAsync(id);
             if (item is null)
             {
-                responseModel = Result<BlogResponseModel>.FailureResult(MessageResource.NotFound, EnumStatusCode.NotFound);
+                responseModel = Result<BlogResponseModel>.FailureResult(
+                    MessageResource.NotFound,
+                    EnumStatusCode.NotFound
+                );
                 goto result;
             }
 
@@ -119,7 +123,7 @@ public class DA_Blog
             responseModel = Result<BlogResponseModel>.FailureResult(ex);
         }
 
-        result:
+    result:
         return responseModel;
     }
 
@@ -131,7 +135,10 @@ public class DA_Blog
             var item = await _context.TblBlogs.FindAsync(id);
             if (item is null)
             {
-                responseModel = Result<BlogResponseModel>.FailureResult(MessageResource.NotFound, EnumStatusCode.NotFound);
+                responseModel = Result<BlogResponseModel>.FailureResult(
+                    MessageResource.NotFound,
+                    EnumStatusCode.NotFound
+                );
                 goto result;
             }
 
@@ -145,7 +152,7 @@ public class DA_Blog
             responseModel = Result<BlogResponseModel>.FailureResult(ex);
         }
 
-        result:
+    result:
         return responseModel;
     }
 }
