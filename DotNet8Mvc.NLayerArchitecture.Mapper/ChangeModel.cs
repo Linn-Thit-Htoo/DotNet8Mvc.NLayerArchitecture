@@ -1,7 +1,4 @@
-﻿using DotNet8Mvc.NLayerArchitecture.DbService.AppDbContexts;
-using DotNet8Mvc.NLayerArchitecture.Models.Features.Blog;
-
-namespace DotNet8Mvc.NLayerArchitecture.Mapper;
+﻿namespace DotNet8Mvc.NLayerArchitecture.Mapper;
 
 public static class ChangeModel
 {
@@ -10,9 +7,9 @@ public static class ChangeModel
         return new BlogModel
         {
             BlogId = dataModel.BlogId,
-            BlogTitle = dataModel.BlogTitle,
-            BlogAuthor = dataModel.BlogAuthor,
-            BlogContent = dataModel.BlogContent
+            BlogTitle = dataModel.BlogTitle!,
+            BlogAuthor = dataModel.BlogAuthor!,
+            BlogContent = dataModel.BlogContent!
         };
     }
 
