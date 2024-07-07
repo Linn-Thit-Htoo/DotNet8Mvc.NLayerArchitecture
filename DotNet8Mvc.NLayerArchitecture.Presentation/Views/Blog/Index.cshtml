@@ -5,22 +5,50 @@
 
 @{
     ViewData["Title"] = "Blog Management";
-    bool success = Model.IsSuccess;
+    var success = TempData["success"];
+    var error = TempData["error"];
 }
 
-@if (!success)
+@if (error is not null)
 {
-    <h3>@Model.Message</h3>
+    <div class="alert alert-danger" role="alert">
+        @error
+    </div>
 }
 
-@if (success)
+@if (success is not null)
 {
-    @foreach (var item in Model.Data.DataLst)
-    {
-        <h3>Blog Id: @item.BlogId</h3>
-        <h3>Blog Title: @item.BlogTitle</h3>
-        <h3>Blog Author: @item.BlogAuthor</h3>
-        <h3>Blog Content: @item.BlogContent</h3>
-        <h3>------------------------------</h3>
-    }
+    <div class="alert alert-success" role="alert">
+        @success
+    </div>
+}
+
+@if (Model.Data.DataLst.Count == 0)
+{
+    <h3>No Data.</h3>
+}
+else
+{
+    <a href="/Blog/CreateBlog" class="btn btn-outline-dark mb-3">Create Blog</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Blog Id</th>
+                <th>Blog Title</th>
+                <th>Blog Author</th>
+                <th>Blog Content</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Data.DataLst)
+            {
+                <tr>
+                    <td>@item.BlogId</td>
+                    <td>@item.BlogTitle</td>
+                    <td>@item.BlogAuthor</td>
+                    <td>@item.BlogContent</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }

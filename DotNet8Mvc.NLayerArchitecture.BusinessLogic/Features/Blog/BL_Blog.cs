@@ -1,6 +1,7 @@
 ﻿using DotNet8Mvc.NLayerArchitecture.DataAccess.Features.Blog;
 using DotNet8Mvc.NLayerArchitecture.Models.Features;
 using DotNet8Mvc.NLayerArchitecture.Models.Features.Blog;
+using DotNet8Mvc.NLayerArchitecture.Models.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,50 @@ namespace DotNet8Mvc.NLayerArchitecture.BusinessLogic.Features.Blog
                     goto result;
 
                 responseModel = await _dA_Blog.CreateBlog(requestModel);
+            }
+            catch (Exception ex)
+            {
+                responseModel = Result<BlogResponseModel>.FailureResult(ex);
+            }
+
+        result:
+            return responseModel;
+        }
+
+        public async Task<Result<BlogResponseModel>> PatchBlog(BlogRequestModel requestModel, int id)
+        {
+            Result<BlogResponseModel> responseModel;
+            try
+            {
+                if(id <= 0)
+                {
+                    responseModel = Result<BlogResponseModel>.FailureResult(MessageResource.InvalidId);
+                    goto result;
+                }
+
+                responseModel = await _dA_Blog.PatchBlog(requestModel, id);
+            }
+            catch (Exception ex)
+            {
+                responseModel = Result<BlogResponseModel>.FailureResult(ex);
+            }
+
+        result:
+            return responseModel;
+        }
+
+        public async Task<Result<BlogResponseModel>> DeleteBlog(int id)
+        {
+            Result<BlogResponseModel> responseModel;
+            try
+            {
+                if (id <= 0)
+                {
+                    responseModel = Result<BlogResponseModel>.FailureResult(MessageResource.InvalidId);
+                    goto result;
+                }
+
+                responseModel = await _dA_Blog.DeleteBlog(id);
             }
             catch (Exception ex)
             {

@@ -1,4 +1,5 @@
 ﻿using DotNet8Mvc.NLayerArchitecture.BusinessLogic.Features.Blog;
+using DotNet8Mvc.NLayerArchitecture.Models.Features.Blog;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNet8Mvc.NLayerArchitecture.Presentation.Controllers
@@ -15,7 +16,34 @@ namespace DotNet8Mvc.NLayerArchitecture.Presentation.Controllers
         public async Task<IActionResult> Index()
         {
             var result = await _bL_Blog.GetBlogs();
+            if (result.IsError)
+            {
+                TempData["error"] = result.Message;
+            }
+
             return View(result);
+        }
+
+        [ActionName("CreateBlog")]
+        public IActionResult CreateBlogPage()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Save(BlogRequestModel requestModel)
+        {
+            var result = await _bL_Blog.CreateBlog(requestModel);
+            if (result.IsSuccess)
+            {
+                TempData["success"] = result.Message;
+            }
+            else
+            {
+                TempData["error"] = result.Message;
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

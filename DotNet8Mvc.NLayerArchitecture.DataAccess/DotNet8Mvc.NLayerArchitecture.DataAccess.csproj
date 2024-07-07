@@ -10,6 +10,7 @@
     <ProjectReference Include="..\DotNet8Mvc.NLayerArchitecture.DbService\DotNet8Mvc.NLayerArchitecture.DbService.csproj" />
     <ProjectReference Include="..\DotNet8Mvc.NLayerArchitecture.Mapper\DotNet8Mvc.NLayerArchitecture.Mapper.csproj" />
     <ProjectReference Include="..\DotNet8Mvc.NLayerArchitecture.Models\DotNet8Mvc.NLayerArchitecture.Models.csproj" />
+    <ProjectReference Include="..\DotNet8Mvc.NLayerArchitecture.Shared\DotNet8Mvc.NLayerArchitecture.Shared.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Create Blog";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Create Blog</h3>
+                </div>
+                <div class="card-body">
+                   <form method="post" action="/Blog/Save">
+                        <label>Blog Title: </label>
+                        <input name="BlogTitle" class="form-control" required />
+                        <br />
+                        <label>Blog Author: </label>
+                        <input name="BlogAuthor" class="form-control" required />
+                        <br />
+                        <label>Blog Content: </label>
+                        <input name="BlogContent" class="form-control" required />
+                        <br />
+                        <button type="submit" class="btn btn-outline-info float-end">Save</button>
+                   </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
