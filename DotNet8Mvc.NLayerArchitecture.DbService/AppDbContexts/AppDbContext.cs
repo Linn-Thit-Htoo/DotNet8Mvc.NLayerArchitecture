@@ -2,14 +2,10 @@
 
 public partial class AppDbContext : DbContext
 {
-    public AppDbContext()
-    {
-    }
+    public AppDbContext() { }
 
     public AppDbContext(DbContextOptions<AppDbContext> options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public virtual DbSet<TblBlog> TblBlogs { get; set; }
 
@@ -22,6 +18,7 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<TestTable> TestTables { get; set; }
 
     public virtual DbSet<TestTableN> TestTableNs { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<TblBlog>(entity =>
@@ -73,11 +70,10 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.Entity<TestTable>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("TestTable");
+            entity.HasNoKey().ToTable("TestTable");
 
-            entity.Property(e => e.ColVc)
+            entity
+                .Property(e => e.ColVc)
                 .HasMaxLength(1200)
                 .IsUnicode(false)
                 .HasColumnName("ColVC");
@@ -85,13 +81,9 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.Entity<TestTableN>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("TestTableN");
+            entity.HasNoKey().ToTable("TestTableN");
 
-            entity.Property(e => e.ColVc)
-                .HasMaxLength(1200)
-                .HasColumnName("ColVC");
+            entity.Property(e => e.ColVc).HasMaxLength(1200).HasColumnName("ColVC");
         });
 
         OnModelCreatingPartial(modelBuilder);
