@@ -37,6 +37,7 @@ else
                 <th>Blog Title</th>
                 <th>Blog Author</th>
                 <th>Blog Content</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -47,6 +48,10 @@ else
                     <td>@item.BlogTitle</td>
                     <td>@item.BlogAuthor</td>
                     <td>@item.BlogContent</td>
+                    <td>
+                        <a class="btn btn-outline-success" href="/Blog/EditBlog/@item.BlogId">Edit</a>
+                        <button class="btn btn-outline-danger">Delete</button>
+                    </td>
                 </tr>
             }
         </tbody>

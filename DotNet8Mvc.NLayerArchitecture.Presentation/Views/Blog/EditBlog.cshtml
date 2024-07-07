@@ -1,0 +1,35 @@
+﻿@using DotNet8Mvc.NLayerArchitecture.Models.Features
+@using DotNet8Mvc.NLayerArchitecture.Models.Features.Blog
+
+@model Result<BlogModel>;
+
+@{
+    ViewData["Title"] = "Edit Blog";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Edit Blog</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="/Blog/Save">
+                        <input type="hidden" value="@Model.Data.BlogId" />
+                        <label>Blog Title: </label>
+                        <input name="BlogTitle" class="form-control" required value="@Model.Data.BlogTitle" />
+                        <br />
+                        <label>Blog Author: </label>
+                        <input name="BlogAuthor" class="form-control" required value="@Model.Data.BlogAuthor" />
+                        <br />
+                        <label>Blog Content: </label>
+                        <input name="BlogContent" class="form-control" required value="@Model.Data.BlogContent" />
+                        <br />
+                        <button type="submit" class="btn btn-outline-info float-end">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

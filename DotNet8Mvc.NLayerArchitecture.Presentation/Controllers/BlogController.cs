@@ -46,7 +46,8 @@ namespace DotNet8Mvc.NLayerArchitecture.Presentation.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> EditBlog(int id)
+        [ActionName("EditBlog")]
+        public async Task<IActionResult> Edit(int id)
         {
             var result = await _bL_Blog.GetBlogById(id);
             return View(result);
