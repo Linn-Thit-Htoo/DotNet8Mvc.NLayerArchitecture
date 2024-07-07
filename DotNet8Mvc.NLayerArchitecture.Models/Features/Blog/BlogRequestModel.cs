@@ -1,6 +1,4 @@
-﻿using DotNet8Mvc.NLayerArchitecture.Shared;
-
-namespace DotNet8Mvc.NLayerArchitecture.Models.Features.Blog;
+﻿namespace DotNet8Mvc.NLayerArchitecture.Models.Features.Blog;
 
 public class BlogRequestModel
 {

@@ -1,6 +1,4 @@
-﻿using DotNet8Mvc.NLayerArchitecture.Models.Enums;
-
-namespace DotNet8Mvc.NLayerArchitecture.Models.Features;
+﻿namespace DotNet8Mvc.NLayerArchitecture.Models.Features;
 
 public class Result<T>
 {
