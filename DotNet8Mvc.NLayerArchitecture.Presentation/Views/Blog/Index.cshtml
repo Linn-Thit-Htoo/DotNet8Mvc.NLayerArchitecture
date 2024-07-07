@@ -1,0 +1,26 @@
+﻿@using DotNet8Mvc.NLayerArchitecture.Models.Features
+@using DotNet8Mvc.NLayerArchitecture.Models.Features.Blog
+
+@model Result<BlogListResponseModel>;
+
+@{
+    ViewData["Title"] = "Blog Management";
+    bool success = Model.IsSuccess;
+}
+
+@if (!success)
+{
+    <h3>@Model.Message</h3>
+}
+
+@if (success)
+{
+    @foreach (var item in Model.Data.DataLst)
+    {
+        <h3>Blog Id: @item.BlogId</h3>
+        <h3>Blog Title: @item.BlogTitle</h3>
+        <h3>Blog Author: @item.BlogAuthor</h3>
+        <h3>Blog Content: @item.BlogContent</h3>
+        <h3>------------------------------</h3>
+    }
+}
