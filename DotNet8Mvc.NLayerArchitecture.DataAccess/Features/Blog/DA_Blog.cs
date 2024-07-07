@@ -1,13 +1,4 @@
-﻿using DotNet8Mvc.NLayerArchitecture.DbService.AppDbContexts;
-using DotNet8Mvc.NLayerArchitecture.Mapper;
-using DotNet8Mvc.NLayerArchitecture.Models.Enums;
-using DotNet8Mvc.NLayerArchitecture.Models.Features;
-using DotNet8Mvc.NLayerArchitecture.Models.Features.Blog;
-using DotNet8Mvc.NLayerArchitecture.Models.Resources;
-using DotNet8Mvc.NLayerArchitecture.Shared;
-using Microsoft.EntityFrameworkCore;
-
-namespace DotNet8Mvc.NLayerArchitecture.DataAccess.Features.Blog;
+﻿namespace DotNet8Mvc.NLayerArchitecture.DataAccess.Features.Blog;
 
 public class DA_Blog
 {
