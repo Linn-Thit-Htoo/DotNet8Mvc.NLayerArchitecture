@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DotNet8Mvc.NLayerArchitecture.DbService.AppDbContexts;
+﻿namespace DotNet8Mvc.NLayerArchitecture.DbService.AppDbContexts;
 
 public partial class TestTableN
 {
