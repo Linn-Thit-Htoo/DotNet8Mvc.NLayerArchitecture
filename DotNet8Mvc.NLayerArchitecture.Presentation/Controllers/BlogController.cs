@@ -1,8 +1,4 @@
-﻿using DotNet8Mvc.NLayerArchitecture.BusinessLogic.Features.Blog;
-using DotNet8Mvc.NLayerArchitecture.Models.Features.Blog;
-using Microsoft.AspNetCore.Mvc;
-
-namespace DotNet8Mvc.NLayerArchitecture.Presentation.Controllers;
+﻿namespace DotNet8Mvc.NLayerArchitecture.Presentation.Controllers;
 
 public class BlogController : Controller
 {

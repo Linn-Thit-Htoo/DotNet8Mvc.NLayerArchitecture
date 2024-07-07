@@ -1,9 +1,4 @@
-﻿using DotNet8Mvc.NLayerArchitecture.BusinessLogic.Features.Blog;
-using DotNet8Mvc.NLayerArchitecture.DataAccess.Features.Blog;
-using DotNet8Mvc.NLayerArchitecture.DbService.AppDbContexts;
-using Microsoft.EntityFrameworkCore;
-
-namespace DotNet8Mvc.NLayerArchitecture.Presentation;
+﻿namespace DotNet8Mvc.NLayerArchitecture.Presentation;
 
 public static class ModularService
 {

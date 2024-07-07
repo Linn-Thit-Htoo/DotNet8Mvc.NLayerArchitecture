@@ -1,7 +1,3 @@
-using System.Diagnostics;
-using DotNet8Mvc.NLayerArchitecture.Presentation.Models;
-using Microsoft.AspNetCore.Mvc;
-
 namespace DotNet8Mvc.NLayerArchitecture.Presentation.Controllers;
 
 public class HomeController : Controller
