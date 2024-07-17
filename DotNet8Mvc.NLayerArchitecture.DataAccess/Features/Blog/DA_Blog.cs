@@ -52,7 +52,7 @@ public class DA_Blog
             responseModel = Result<BlogModel>.FailureResult(ex);
         }
 
-    result:
+        result:
         return responseModel;
     }
 
@@ -114,7 +114,7 @@ public class DA_Blog
             responseModel = Result<BlogResponseModel>.FailureResult(ex);
         }
 
-    result:
+        result:
         return responseModel;
     }
 
@@ -143,7 +143,7 @@ public class DA_Blog
             responseModel = Result<BlogResponseModel>.FailureResult(ex);
         }
 
-    result:
+        result:
         return responseModel;
     }
 }
